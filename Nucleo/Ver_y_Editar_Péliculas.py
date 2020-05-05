@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Nucleo import Interfaz_rc
 
 
 class Ui_Ver_y_Editar_MainWindow(object):
@@ -91,4 +92,3 @@ class Ui_Ver_y_Editar_MainWindow(object):
         self.ID_textEdit.setPlaceholderText(_translate("Ver_y_Editar_MainWindow", "Ingrese el número del ID a Editar o Borrar"))
         self.Editar_pushButton.setText(_translate("Ver_y_Editar_MainWindow", "Editar"))
         self.Borrar_pushButton_2.setText(_translate("Ver_y_Editar_MainWindow", "Borrar"))
-import Interfaz_rc

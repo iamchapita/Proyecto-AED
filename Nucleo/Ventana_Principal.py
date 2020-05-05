@@ -5,16 +5,16 @@
 # Created by: PyQt5 UI code generator 5.14.0
 #
 # WARNING! All changes made in this file will be lost!
-
-
+import sys
+import os
+from Nucleo.Acerca_de import *
+from Nucleo.Tamaño_Pantalla import Center
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication
-from Acerca_de import Ui_MainWindow
-from Agregar_Pélicula import Ui_Agregar_MainWindow
-from Ver_y_Editar_Péliculas import Ui_Ver_y_Editar_MainWindow
-from Árbol_Jerárquico_de_Categorías import Ui_Arbol_Jerarquico_MainWindow
-from Árbol_Binario_de_Duración import Ui_Arbol_Binario_MainWindow
-from Tamaño_Pantalla import Center
+#from Ver_y_Editar_Péliculas import Ui_Ver_y_Editar_MainWindow
+#from Árbol_Jerárquico_de_Categorías import Ui_Arbol_Jerarquico_MainWindow
+#from Árbol_Binario_de_Duración import Ui_Arbol_Binario_MainWindow
+#from Tamaño_Pantalla import Center
 
 
 class Ui_Principal_MainWindow(object):
@@ -24,6 +24,7 @@ class Ui_Principal_MainWindow(object):
                 self.window = QtWidgets.QMainWindow()
                 self.ui = Ui_MainWindow()
                 self.ui.setupUi(self.window)
+                Center.center(self.window)
                 self.window.show()
 
         def OpenAdd(self):
@@ -61,7 +62,7 @@ class Ui_Principal_MainWindow(object):
                 Principal_MainWindow.setMaximumSize(QtCore.QSize(480, 548))
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap(
-                        "../Python/Nucleo/Imagenes/logos-UNAH-600x600.png"), 
+                        "../Proyecto1AED/Nucleo/Imagenes/logos-UNAH-600x600.png"), 
                         QtGui.QIcon.Normal, QtGui.QIcon.Off
                         )
                 Principal_MainWindow.setWindowIcon(icon)
