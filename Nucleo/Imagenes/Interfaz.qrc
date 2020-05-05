@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="Logo300x300">
+    <file>logos-UNAH-300x300.png</file>
+  </qresource>
+  <qresource prefix="Logo600x600">
+    <file>logos-UNAH-600x600.png</file>
+  </qresource>
+  <qresource prefix="Cerrar">
+    <file>cerrar-png-7.png</file>
+  </qresource>
+</RCC>
