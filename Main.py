@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, 
 
 #Importando Archivo.py donde se construyó la interfaz
 #Segundo Commit
+
 import sys
 import os
 
@@ -50,8 +51,8 @@ class Ventana_Principal(QMainWindow):
             else:
                 event.ignore()
     """
-    
-    def Acerca_de_window(self):
+
+    def Acerca_de_window(self): #Función para abrir ventana de Acerca de
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)

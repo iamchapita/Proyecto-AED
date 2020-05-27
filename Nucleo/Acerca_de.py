@@ -9,7 +9,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
-from Nucleo.Tamaño_Pantalla import Center
 
 class Ui_MainWindow(object):
 
