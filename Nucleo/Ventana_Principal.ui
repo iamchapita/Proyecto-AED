@@ -113,7 +113,7 @@ border-radius: 30px;</string>
    <widget class="QLabel" name="Numero_label">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>180</x>
       <y>120</y>
       <width>131</width>
       <height>101</height>
@@ -129,6 +129,9 @@ font: 70pt &quot;Hack&quot;;
     </property>
     <property name="scaledContents">
      <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="Ver_y_editar_button">
