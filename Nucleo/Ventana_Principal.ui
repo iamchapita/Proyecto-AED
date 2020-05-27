@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</iconset>
+    <normaloff>Imagenes/logos-UNAH-600x600.png</normaloff>Imagenes/logos-UNAH-600x600.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255)</string>
@@ -52,68 +52,6 @@ border-radius: 30px;</string>
     </property>
     <property name="text">
      <string>Agregar</string>
-    </property>
-    <property name="shortcut">
-     <string notr="true"/>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Ver_y_editar_button">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>390</y>
-      <width>301</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(254, 217, 102);
-font: 10pt &quot;Hack&quot;;
-color: rgb(188, 145, 15);
-border-style: solid;
-border-color: black;
-border-width: 0.5px;
-border-radius: 30px;</string>
-    </property>
-    <property name="text">
-     <string>Ver y Editar Listado</string>
-    </property>
-    <property name="shortcut">
-     <string notr="true"/>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Visualizacion_button">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>460</y>
-      <width>301</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(109, 158, 235);
-font: 10pt &quot;Hack&quot;;
-color: white;
-border-style: solid;
-border-color: black;
-border-width: 0.5px;
-border-radius: 30px;</string>
-    </property>
-    <property name="text">
-     <string>Visualización de Árbol</string>
     </property>
     <property name="shortcut">
      <string notr="true"/>
@@ -172,7 +110,7 @@ border-radius: 30px;</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="Numero_label">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -193,11 +131,71 @@ font: 70pt &quot;Hack&quot;;
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="Ver_y_editar_button">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>390</y>
+      <width>301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(254, 217, 102);
+font: 10pt &quot;Hack&quot;;
+border-style: solid;
+border-color: black;
+border-width: 0.5px;
+border-radius: 30px;</string>
+    </property>
+    <property name="text">
+     <string>Ver y Editar Péliculas</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true"/>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Visualizacion_button">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>460</y>
+      <width>301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(109, 158, 235);
+font: 10pt &quot;Hack&quot;;
+border-style: solid;
+border-color: black;
+border-width: 0.5px;
+border-radius: 30px;</string>
+    </property>
+    <property name="text">
+     <string>Visualización de Árbol</string>
+    </property>
+    <property name="shortcut">
+     <string notr="true"/>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../Python/Nucleo/Imagenes/Interfaz.qrc"/>
+  <include location="Imagenes/Interfaz.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,46 +1,63 @@
 # -*- coding: utf-8 -*-
 
 #Importando archivos necesarios para funcionamiento de la Interfaz
+from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication
+from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget 
 
 #Importando Archivo.py donde se construyó la interfaz
 #Segundo Commit
 import sys
 import os
 
-from Nucleo import Acerca_de
 from Nucleo.Acerca_de import *
-from Nucleo import Agregar_Pélicula
-from Nucleo import Árbol_Binario_de_Duración
-from Nucleo import Árbol_Jerárquico_de_Categorías
-from Nucleo import DialogBox_Agregar
-from Nucleo import DialogBox_Confirmar
-from Nucleo import Interfaz_rc
-from Nucleo.Tamaño_Pantalla import Center
-from Nucleo import Ventana_Principal
-from Nucleo import Ver_y_Editar_Péliculas
+from Nucleo.Agregar_Pélicula import *
+from Nucleo.Árbol_Binario_de_Duración  import *
+from Nucleo.Árbol_Jerárquico_de_Categorías import *
+from Nucleo.DialogBox_Agregar import *
+from Nucleo.DialogBox_Confirmar import *
+from Nucleo.Tamaño_Pantalla import *
+from Nucleo.Ventana_Principal import *
+from Nucleo.Ver_y_Editar_Péliculas import *
 
 """
-NO SE NECESITA
+class Acerca_de(QMainWindow):
 
-Se crea una subclase  de QMainWindow en donde recibe de parametro la clase Acerca_de donde está construida la UI
-class Acerca_de(QtWidgets.QMainWindow, Acerca_de.Ui_MainWindow):
+    def __init__(self):
 
-    def __init__(self, parent = None):
-
-        super(Acerca_de, self).__init__(parent)
-        self.setupUi(self) #Configurando todos los parámetros de la QMainWindow
+        super().__init__()
+        uic.loadUi("Nucleo//Acerca_de.ui", self) #Configurando todos los parámetros de la QMainWindow
         Center.center(self)
 """
 #Se crea una subclase  de QMainWindow en donde recibe de parametro la clase Ventana_Principal donde está construida la UI
-class Ventana_Principal(QtWidgets.QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
+class Ventana_Principal(QMainWindow):
     
-    def __init__(self, parent=None):
+    def __init__(self):
 
-        super(Ventana_Principal,self).__init__(parent)
-        self.setupUi(self) #Configurando todos los parámetros de la QMainWindow
-        Center.center(self)
+        super().__init__() 
+        uic.loadUi("Nucleo//Ventana_Principal.ui",self) #Cargando desde .ui la interfaz gráfica
+        Center.center(self) #Centrando en pantalla la Ventana Princpal 
+    
+        self.Acerca_de_button.clicked.connect(self.Acerca_de_window)
+       
+    """def closeEvent(self, event):
+            reply = QMessageBox.question(self, 'Cierre de Ventana', '¿Desea cerrar esta ventana?', 
+            QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            
+            if reply == QMessageBox.Yes:
+                event.accept()
+                
+            else:
+                event.ignore()
+    """
+    
+    def Acerca_de_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        Center.center(self.window)
+        self.window.show()
+        
         
 #Función Main
 def main():

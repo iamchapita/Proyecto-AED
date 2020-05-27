@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
 from Nucleo.Tamaño_Pantalla import Center
 
 class Ui_MainWindow(object):
@@ -232,3 +233,4 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "Año:"))
         self.label_17.setText(_translate("MainWindow", "2020"))
 
+        
