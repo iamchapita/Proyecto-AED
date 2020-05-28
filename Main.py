@@ -39,7 +39,8 @@ class Ventana_Principal(QMainWindow):
         
     def closeEvent(self, event):
         close = QMessageBox()
-        close.setText("¿Estás Seguro?")
+        close.setWindowTitle("Salir")
+        close.setText("¿Está Seguro?")
         close.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
         close = close.exec()
 
@@ -59,7 +60,8 @@ class Acerca_de(QMainWindow):
     def closeEvent(self, event):
         
         close = QMessageBox()
-        close.setText("¿Estás Seguro?")
+        close.setWindowTitle("Salir")
+        close.setText("¿Está Seguro?")
         close.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
         close = close.exec()
 
