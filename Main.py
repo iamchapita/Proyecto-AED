@@ -4,6 +4,7 @@
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget 
+from PyQt5.QtCore import *
 
 #Importando Archivo.py donde se construyó la interfaz
 #Segundo Commit
@@ -21,54 +22,66 @@ from Nucleo.Tamaño_Pantalla import *
 from Nucleo.Ventana_Principal import *
 from Nucleo.Ver_y_Editar_Péliculas import *
 
-"""
-class Acerca_de(QMainWindow):
-
-    def __init__(self):
-
-        super().__init__()
-        uic.loadUi("Nucleo//Acerca_de.ui", self) #Configurando todos los parámetros de la QMainWindow
-        Center.center(self)
-"""
 #Se crea una subclase  de QMainWindow en donde recibe de parametro la clase Ventana_Principal donde está construida la UI
 class Ventana_Principal(QMainWindow):
     
     def __init__(self):
 
-        super().__init__() 
+        super(Ventana_Principal, self).__init__() 
         uic.loadUi("Nucleo//Ventana_Principal.ui",self) #Cargando desde .ui la interfaz gráfica
         Center.center(self) #Centrando en pantalla la Ventana Princpal 
+        self.Acerca_de_button.clicked.connect(self.abrir_Acerca_de)
+
+    def abrir_Acerca_de(self): #Función para abrir ventana de Acerca de
+        self.hide()
+        Acerca_de_ventana = Acerca_de(self)
+        Acerca_de_ventana.show()
+        
+    def closeEvent(self, event):
+        close = QMessageBox()
+        close.setText("¿Estás Seguro?")
+        close.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+        close = close.exec()
+
+        if close == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+class Acerca_de(QMainWindow):
+
+    def __init__(self, parent = None):
+
+        super(Acerca_de, self).__init__(parent)
+        uic.loadUi("Nucleo//Acerca_de.ui", self) #Configurando todos los parámetros de la QMainWindow
+        Center.center(self)
+
+    def closeEvent(self, event):
+        
+        close = QMessageBox()
+        close.setText("¿Estás Seguro?")
+        close.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+        close = close.exec()
+
+        if close == QMessageBox.Yes:
+
+            self.abrir_Ventana_Principal()
+
+            event.accept()
+
+        else:
+            event.ignore()
     
-        self.Acerca_de_button.clicked.connect(self.Acerca_de_window)
-       
-    """def closeEvent(self, event):
-            reply = QMessageBox.question(self, 'Cierre de Ventana', '¿Desea cerrar esta ventana?', 
-            QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-            
-            if reply == QMessageBox.Yes:
-                event.accept()
-                
-            else:
-                event.ignore()
-    """
+    def abrir_Ventana_Principal(self):
+        self.parent().show()
 
-    def Acerca_de_window(self): #Función para abrir ventana de Acerca de
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        Center.center(self.window)
-        self.window.show()
-        
-        
+
 #Función Main
-def main():
+if __name__ == "__main__":
+    
+    app = QtWidgets.QApplication(sys.argv)
+    Ventana_Principal_MainWindow = Ventana_Principal()
+    
+    Ventana_Principal_MainWindow.show()
 
-    app = QApplication(sys.argv) #Creando una instancia de QApplication para poder controlar el blucle infinito de pintado
-    VentanaPrincipal = Ventana_Principal()
-
-    VentanaPrincipal.show()
-    sys.exit(app.exec_()) #Ejecutando el bucle infinito de pintado
-
-if __name__ == '__main__':
-    main()
-
+    sys.exit(app.exec_())

@@ -32,7 +32,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</iconset>
+    <normaloff>Imagenes/logos-UNAH-600x600.png</normaloff>Imagenes/logos-UNAH-600x600.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -280,7 +280,7 @@ font: 10pt &quot;Hack&quot;;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</pixmap>
+     <pixmap>Imagenes/logos-UNAH-600x600.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="label_12">
@@ -439,7 +439,7 @@ font: 10pt &quot;Hack&quot;;
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../Python/Nucleo/Imagenes/Interfaz.qrc"/>
+  <include location="Imagenes/Interfaz.qrc"/>
  </resources>
  <connections/>
 </ui>

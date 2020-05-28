@@ -8,14 +8,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
 
 class Ui_MainWindow(object):
-
+    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        sizeObject = QtWidgets.QDesktopWidget().screenGeometry(0)
-        MainWindow.setGeometry(QtCore.QRect((sizeObject.height()/2),(sizeObject.width()/2),480,548))
         MainWindow.resize(567, 562)
         MainWindow.setMinimumSize(QtCore.QSize(567, 562))
         MainWindow.setMaximumSize(QtCore.QSize(567, 562))
@@ -23,7 +20,7 @@ class Ui_MainWindow(object):
         font.setFamily("Hack")
         MainWindow.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Proyecto1AED/Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("background-color:white;")
@@ -128,7 +125,7 @@ class Ui_MainWindow(object):
         self.label_11 = QtWidgets.QLabel(self.centralwidget)
         self.label_11.setGeometry(QtCore.QRect(270, -20, 531, 461))
         self.label_11.setText("")
-        self.label_11.setPixmap(QtGui.QPixmap("../Proyecto1AED/Nucleo/Imagenes/logos-UNAH-600x600.png"))
+        self.label_11.setPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"))
         self.label_11.setObjectName("label_11")
         self.label_12 = QtWidgets.QLabel(self.centralwidget)
         self.label_12.setGeometry(QtCore.QRect(40, 330, 211, 21))
@@ -232,4 +229,4 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "Año:"))
         self.label_17.setText(_translate("MainWindow", "2020"))
 
-        
+
