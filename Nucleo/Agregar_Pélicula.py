@@ -13,28 +13,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Agregar_MainWindow(object):
 
     def setupUi(self, Agregar_MainWindow):
-            
+
         Agregar_MainWindow.setObjectName("Agregar_MainWindow")
-        sizeObject = QtWidgets.QDesktopWidget().screenGeometry(0)
-        Agregar_MainWindow.setGeometry(QtCore.QRect((sizeObject.height()/2),(sizeObject.width()/2),480,548))
         Agregar_MainWindow.resize(762, 479)
         Agregar_MainWindow.setMinimumSize(QtCore.QSize(762, 479))
         Agregar_MainWindow.setMaximumSize(QtCore.QSize(762, 479))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Python/Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Agregar_MainWindow.setWindowIcon(icon)
         Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n"
 "")
         self.centralwidget = QtWidgets.QWidget(Agregar_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.Descripcion_textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.Descripcion_textEdit.setGeometry(QtCore.QRect(40, 140, 681, 131))
-        self.Descripcion_textEdit.setStyleSheet("color:black;\n"
-"font: 10pt \"Hack\";\n"
-"border-width: 3px;\n"
-"border-color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);")
-        self.Descripcion_textEdit.setObjectName("Descripcion_textEdit")
         self.Nombre_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.Nombre_lineEdit.setGeometry(QtCore.QRect(40, 30, 681, 34))
         font = QtGui.QFont()
@@ -152,6 +142,15 @@ class Ui_Agregar_MainWindow(object):
         self.Cancelar_pushButton.setDefault(False)
         self.Cancelar_pushButton.setFlat(False)
         self.Cancelar_pushButton.setObjectName("Cancelar_pushButton")
+        self.Descripcion_textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.Descripcion_textEdit.setGeometry(QtCore.QRect(40, 130, 681, 141))
+        self.Descripcion_textEdit.setStyleSheet("color:black;\n"
+"font: 10pt \"Hack\";\n"
+"border-width: 3px;\n"
+"border-color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);")
+        self.Descripcion_textEdit.setObjectName("Descripcion_textEdit")
+        self.Descripcion_textEdit.setMaxLength(500)
         Agregar_MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(Agregar_MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -163,12 +162,6 @@ class Ui_Agregar_MainWindow(object):
     def retranslateUi(self, Agregar_MainWindow):
         _translate = QtCore.QCoreApplication.translate
         Agregar_MainWindow.setWindowTitle(_translate("Agregar_MainWindow", "Agregar Pélicula"))
-        self.Descripcion_textEdit.setHtml(_translate("Agregar_MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Hack\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Noto Sans\';\"><br /></p></body></html>"))
-        self.Descripcion_textEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Descripción de la Pélicula"))
         self.Nombre_lineEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Nombre de Pélicula"))
         self.Duracion_lineEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Duración de la Pélicula(HH:MM:SS)"))
         self.Director_lineEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Director de la Pélicula"))
@@ -208,3 +201,4 @@ class Ui_Agregar_MainWindow(object):
         self.comboBox.setItemText(32, _translate("Agregar_MainWindow", "Sobre política"))
         self.Agregar_pushButton.setText(_translate("Agregar_MainWindow", "Agregar"))
         self.Cancelar_pushButton.setText(_translate("Agregar_MainWindow", "Cancelar"))
+        self.Descripcion_textEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Descripción de la Pélicula"))

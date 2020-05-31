@@ -27,46 +27,13 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</normaloff>../Python/Nucleo/Imagenes/logos-UNAH-600x600.png</iconset>
+    <normaloff>Imagenes/logos-UNAH-600x600.png</normaloff>Imagenes/logos-UNAH-600x600.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(204, 204, 204);
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="Descripcion_textEdit">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>681</width>
-      <height>131</height>
-     </rect>
-    </property>
-    <property name="cursor" stdset="0">
-     <cursorShape>IBeamCursor</cursorShape>
-    </property>
-    <property name="acceptDrops">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:black;
-font: 10pt &quot;Hack&quot;;
-border-width: 3px;
-border-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Hack'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Noto Sans';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="placeholderText">
-     <string>Descripción de la Pélicula</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="Nombre_lineEdit">
     <property name="geometry">
      <rect>
@@ -426,6 +393,26 @@ border-radius: 30px;</string>
     </property>
     <property name="flat">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Descripcion_textEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>130</y>
+      <width>681</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:black;
+font: 10pt &quot;Hack&quot;;
+border-width: 3px;
+border-color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="placeholderText">
+     <string>Descripción de la Pélicula</string>
     </property>
    </widget>
   </widget>
