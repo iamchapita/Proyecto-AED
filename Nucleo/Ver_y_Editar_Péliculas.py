@@ -8,8 +8,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Nucleo import Interfaz_rc
-
 
 class Ui_Ver_y_Editar_MainWindow(object):
 
@@ -25,7 +23,7 @@ class Ui_Ver_y_Editar_MainWindow(object):
         font.setFamily("Hack")
         Ver_y_Editar_MainWindow.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../Python/Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Ver_y_Editar_MainWindow.setWindowIcon(icon)
         Ver_y_Editar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);")
         self.centralwidget = QtWidgets.QWidget(Ver_y_Editar_MainWindow)

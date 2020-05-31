@@ -11,9 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Agregar_MainWindow(object):
-
     def setupUi(self, Agregar_MainWindow):
-
         Agregar_MainWindow.setObjectName("Agregar_MainWindow")
         Agregar_MainWindow.resize(762, 479)
         Agregar_MainWindow.setMinimumSize(QtCore.QSize(762, 479))
@@ -150,7 +148,6 @@ class Ui_Agregar_MainWindow(object):
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);")
         self.Descripcion_textEdit.setObjectName("Descripcion_textEdit")
-        self.Descripcion_textEdit.setMaxLength(500)
         Agregar_MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(Agregar_MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -202,3 +199,4 @@ class Ui_Agregar_MainWindow(object):
         self.Agregar_pushButton.setText(_translate("Agregar_MainWindow", "Agregar"))
         self.Cancelar_pushButton.setText(_translate("Agregar_MainWindow", "Cancelar"))
         self.Descripcion_textEdit.setPlaceholderText(_translate("Agregar_MainWindow", "Descripción de la Pélicula"))
+
