@@ -17,7 +17,7 @@ class Ui_Agregar_MainWindow(object):
         Agregar_MainWindow.setMinimumSize(QtCore.QSize(762, 479))
         Agregar_MainWindow.setMaximumSize(QtCore.QSize(762, 479))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Agregar_MainWindow.setWindowIcon(icon)
         Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n"
 "")
