@@ -8,22 +8,20 @@ from PyQt5.QtCore import *
 import sys
 import os
 
-from Nucleo.Acerca_de import *
-from Nucleo.Agregar_Pélicula import *
-from Nucleo.Árbol_Binario_de_Duración  import *
-from Nucleo.Árbol_Jerárquico_de_Categorías import *
-from Nucleo.DialogBox_Agregar import *
-from Nucleo.DialogBox_Confirmar import *
+from Nucleo import Acerca_de 
+from Nucleo import Agregar_Pélicula 
+from Nucleo import Árbol_Binario_de_Duración
+from Nucleo import Árbol_Jerárquico_de_Categorías 
 from Nucleo.Tamaño_Pantalla import *
-from Nucleo.Ventana_Principal import *
-from Nucleo.Ver_y_Editar_Péliculas import *
+from Nucleo import Ventana_Principal 
+from Nucleo import Ver_y_Editar_Péliculas 
 
-class Ventana_Principal(QMainWindow):
+class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
     
     def __init__(self, parent = None):
 
-        super(Ventana_Principal, self).__init__(parent) 
-        uic.loadUi("Nucleo//Ventana_Principal.ui",self) 
+        super(Ventana_Principal, self).__init__(parent)
+        self.setupUi(self)
         Center.center(self) 
         self.Acerca_de_button.clicked.connect(self.abrir_Acerca_de) 
         self.Agregar_button.clicked.connect(self.abrir_Agregar_Pelicula) 
@@ -47,6 +45,7 @@ class Ventana_Principal(QMainWindow):
     def closeEvent(self, event): 
 
         cerrar = QMessageBox() 
+        cerrar.setIcon(QMessageBox.Warning)
         cerrar.setWindowTitle("Salir") 
         cerrar.setText("<p align='center'>¿Está Seguro?") 
         cerrar.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
@@ -60,28 +59,28 @@ class Ventana_Principal(QMainWindow):
 
             event.ignore() 
   
-class Acerca_de(QMainWindow):
+class Acerca_de(QMainWindow, Acerca_de.Ui_MainWindow):
 
     def __init__(self, parent = None):
 
         super(Acerca_de, self).__init__(parent)
-        uic.loadUi("Nucleo//Acerca_de.ui", self) 
+        self.setupUi(self)
         Center.center(self) 
 
-
-class Agregar_Pelicula(QMainWindow):
+class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
 
     def __init__(self, parent = None ):
 
         super(Agregar_Pelicula, self).__init__(parent)
-        uic.loadUi("Nucleo//Agregar_Pélicula.ui", self)
+        self.setupUi(self)
         Center.center(self) 
-        self.Agregar_pushButton.clicked.connect(self.revison_Agregar) 
-        self.Cancelar_pushButton.clicked.connect(self.close) 
+        self.Agregar_pushButton.clicked.connect(self.validando_Agregar) 
+        self.Cancelar_pushButton.clicked.connect(self.close)
 
     def closeEvent(self, event2): 
 
-        cerrar1 = QMessageBox() 
+        cerrar1 = QMessageBox()
+        cerrar1.setIcon(QMessageBox.Warning)
         cerrar1.setWindowTitle("Salir") 
         cerrar1.setText("<p align='center'>¿Está seguro que desea salir?\n<p align='center'>Esta acción descartará los cambios hechos") 
         cerrar1.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
@@ -96,34 +95,87 @@ class Agregar_Pelicula(QMainWindow):
             
             event2.ignore() 
     
-    def revison_Agregar(self): 
+    def validando_Agregar(self): 
 
-        exitoso = QMessageBox() 
-        exitoso.setWindowTitle("Exito") 
-        exitoso.setText("<p align='center'>Se ha Agregado con Exito") 
-        exitoso.addButton(QMessageBox.Ok) 
-        respuesta = exitoso.exec() 
+        ventana_mensaje = QMessageBox()
+        ventana_mensaje.setIcon(QMessageBox.Information)
 
-        if(respuesta == QMessageBox.Ok):
+        cadena = "Campos no válidos:\n"
 
-            exitoso.close()
-            self.abrir_Ventana_Principal() 
-    
+        if(len(self.Nombre_lineEdit.text()) == 0):
+            cadena += "  Nombre de la Pélicula\n"
+            
+        if(len(self.Duracion_lineEdit.text()) >= 0):
+
+            temp = self.Duracion_lineEdit.text()
+            if(len(temp) < 8):
+
+                cadena += "  Duración de la Pélicula\n"
+
+            else:
+                
+                estado = False
+
+                if(temp[0:2] > "09"):
+                    
+                    estado = True
+                
+                if(temp[3:5] > "59"):
+
+                    estado = True
+                
+                if(temp[6:8] > "59"):
+
+                    estado = True
+
+                if(estado):
+
+                    cadena += "  Duración de la Pélicula\n"
+
+        if(len(self.Descripcion_textEdit.toPlainText()) == 0):
+            cadena += "  Descripción de la Pélicula\n"
+
+        if(len(self.Director_lineEdit.text()) == 0):
+            cadena += "  Director de la Pélicula\n"
+        
+        if(self.comboBox.currentText() == "----Seleccione un Género----"):
+            cadena += "  Género de la Pélicula"
+
+        if(cadena != "Campos no válidos:\n"):
+
+            ventana_mensaje.setWindowTitle("Error") 
+            ventana_mensaje.setText("%s"%(cadena)) 
+            ventana_mensaje.addButton(QMessageBox.Ok) 
+            respuesta = ventana_mensaje.exec()             
+
+        else:
+
+            ventana_mensaje.setWindowTitle("Exito") 
+            ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
+            ventana_mensaje.addButton(QMessageBox.Ok) 
+            respuesta = ventana_mensaje.exec() 
+
+            if(respuesta == QMessageBox.Ok):
+
+                ventana_mensaje.close()
+                self.abrir_Ventana_Principal() 
+            
     def abrir_Ventana_Principal(self): 
         self.Objeto = Ventana_Principal()
         self.Objeto.show() 
         self.hide() 
-
-class Ver_y_Editar_Peliculas(QMainWindow):
+    
+class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Editar_MainWindow):
 
     def __init__(self, parent = None):
         super(Ver_y_Editar_Peliculas, self).__init__(parent)
-        uic.loadUi("Nucleo//Ver_y_Editar_Péliculas.ui", self) 
+        self.setupUi(self) 
         Center.center(self)  
     
     def closeEvent(self, event3): 
 
-        cerrar3 = QMessageBox() 
+        cerrar3 = QMessageBox()
+        cerrar3.setIcon(QMessageBox.Warning)
         cerrar3.setWindowTitle("Salir")
         cerrar3.setText("<p align='center'>¿Está seguro que desea salir?")
         cerrar3.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 

@@ -62,7 +62,7 @@ sizeHint(10);
      <string/>
     </property>
     <property name="maxLength">
-     <number>25</number>
+     <number>50</number>
     </property>
     <property name="placeholderText">
      <string>Nombre de Pélicula</string>

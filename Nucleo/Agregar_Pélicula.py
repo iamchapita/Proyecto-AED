@@ -19,11 +19,13 @@ class Ui_Agregar_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Agregar_MainWindow.setWindowIcon(icon)
-        Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n"
-"")
+        Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n")
         self.centralwidget = QtWidgets.QWidget(Agregar_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Nombre_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.Nombre_regex = QtCore.QRegExp("[a-z A-Z : 0-9]+")
+        self.Nombre_validator = QtGui.QRegExpValidator(self.Nombre_regex, self.Nombre_lineEdit)
+        self.Nombre_lineEdit.setValidator(self.Nombre_validator)
         self.Nombre_lineEdit.setGeometry(QtCore.QRect(40, 30, 681, 34))
         font = QtGui.QFont()
         font.setFamily("Hack")
@@ -32,15 +34,15 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit::{\n"
-"sizeHint(10);\n"
 "}")
         self.Nombre_lineEdit.setText("")
-        self.Nombre_lineEdit.setMaxLength(25)
+        self.Nombre_lineEdit.setMaxLength(50)
         self.Nombre_lineEdit.setClearButtonEnabled(True)
         self.Nombre_lineEdit.setObjectName("Nombre_lineEdit")
         self.Duracion_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.Duracion_regex = QtCore.QRegExp("[0-60:]+")
+        self.Duracion_validator = QtGui.QRegExpValidator(self.Duracion_regex)
+        self.Duracion_lineEdit.setValidator(self.Duracion_validator)
         self.Duracion_lineEdit.setGeometry(QtCore.QRect(40, 80, 681, 34))
         font = QtGui.QFont()
         font.setFamily("Hack")
@@ -49,15 +51,15 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit::{\n"
-"sizeHint(10);\n"
 "}")
         self.Duracion_lineEdit.setText("")
         self.Duracion_lineEdit.setMaxLength(8)
         self.Duracion_lineEdit.setClearButtonEnabled(True)
         self.Duracion_lineEdit.setObjectName("Duracion_lineEdit")
         self.Director_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.Director_regex = QtCore.QRegExp("[a-z A-Z]+")
+        self.Director_validator = QtGui.QRegExpValidator(self.Director_regex, self.Director_lineEdit)
+        self.Director_lineEdit.setValidator(self.Director_validator)
         self.Director_lineEdit.setGeometry(QtCore.QRect(40, 290, 681, 34))
         font = QtGui.QFont()
         font.setFamily("Hack")
@@ -66,9 +68,6 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
-"}\n"
-"QLineEdit::{\n"
-"sizeHint(10);\n"
 "}")
         self.Director_lineEdit.setText("")
         self.Director_lineEdit.setMaxLength(50)
@@ -141,6 +140,9 @@ class Ui_Agregar_MainWindow(object):
         self.Cancelar_pushButton.setFlat(False)
         self.Cancelar_pushButton.setObjectName("Cancelar_pushButton")
         self.Descripcion_textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        #self.Descripcion_regex = QtCore.QRegExp("[a-z A-Z 0-9]+")
+        #self.Descripcion_validator = QtGui.QRegExpValidator(self.Descripcion_regex, self.Descripcion_textEdit)
+        #self.Descripcion_textEdit.setValidator(self.Descripcion_validator)
         self.Descripcion_textEdit.setGeometry(QtCore.QRect(40, 130, 681, 141))
         self.Descripcion_textEdit.setStyleSheet("color:black;\n"
 "font: 10pt \"Hack\";\n"
