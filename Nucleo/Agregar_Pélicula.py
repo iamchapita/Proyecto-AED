@@ -40,7 +40,7 @@ class Ui_Agregar_MainWindow(object):
         self.Nombre_lineEdit.setClearButtonEnabled(True)
         self.Nombre_lineEdit.setObjectName("Nombre_lineEdit")
         self.Duracion_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.Duracion_regex = QtCore.QRegExp("[0-60:]+")
+        self.Duracion_regex = QtCore.QRegExp("[0-9:]+")
         self.Duracion_validator = QtGui.QRegExpValidator(self.Duracion_regex)
         self.Duracion_lineEdit.setValidator(self.Duracion_validator)
         self.Duracion_lineEdit.setGeometry(QtCore.QRect(40, 80, 681, 34))

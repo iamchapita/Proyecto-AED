@@ -5,8 +5,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget 
 from PyQt5.QtCore import *
 
-import sys
-import os
+from os import system
+import datetime
 
 from Nucleo import Acerca_de 
 from Nucleo import Agregar_Pélicula 
@@ -14,19 +14,23 @@ from Nucleo import Árbol_Binario_de_Duración
 from Nucleo import Árbol_Jerárquico_de_Categorías 
 from Nucleo.Tamaño_Pantalla import *
 from Nucleo import Ventana_Principal 
-from Nucleo import Ver_y_Editar_Péliculas 
+from Nucleo import Ver_y_Editar_Péliculas
+from Nucleo.Información_Pélicula  import *
+from Nucleo.LinkedList import *
+
+ll = LinkedList()
 
 class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
     
     def __init__(self, parent = None):
-
+            
         super(Ventana_Principal, self).__init__(parent)
         self.setupUi(self)
         Center.center(self) 
         self.Acerca_de_button.clicked.connect(self.abrir_Acerca_de) 
         self.Agregar_button.clicked.connect(self.abrir_Agregar_Pelicula) 
         self.Ver_y_editar_button.clicked.connect(self.abrir_Ver_y_Editar)
-
+        
     def abrir_Acerca_de(self): 
 
         self.Acerca_de_ventana = Acerca_de()
@@ -105,32 +109,13 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
         if(len(self.Nombre_lineEdit.text()) == 0):
             cadena += "  Nombre de la Pélicula\n"
             
-        if(len(self.Duracion_lineEdit.text()) >= 0):
-
-            temp = self.Duracion_lineEdit.text()
-            if(len(temp) < 8):
-
-                cadena += "  Duración de la Pélicula\n"
-
-            else:
+        formato_hora = "%H:%M:%S"
+            
+        try:
+            validtime = datetime.datetime.strptime(self.Duracion_lineEdit.text(), formato_hora)
                 
-                estado = False
-
-                if(temp[0:2] > "09"):
-                    
-                    estado = True
-                
-                if(temp[3:5] > "59"):
-
-                    estado = True
-                
-                if(temp[6:8] > "59"):
-
-                    estado = True
-
-                if(estado):
-
-                    cadena += "  Duración de la Pélicula\n"
+        except ValueError:
+            cadena += "  Duración de la Pélicula\n"
 
         if(len(self.Descripcion_textEdit.toPlainText()) == 0):
             cadena += "  Descripción de la Pélicula\n"
@@ -149,11 +134,15 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
             respuesta = ventana_mensaje.exec()             
 
         else:
-
+            
+            objeto_Pelicula = Info_Pelicula(self.Nombre_lineEdit.text(), self.Duracion_lineEdit.text(), 
+            self.Descripcion_textEdit.toPlainText(), self.Director_lineEdit.text(), self.comboBox.currentText())
+            ll.push(objeto_Pelicula)
             ventana_mensaje.setWindowTitle("Exito") 
             ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
             ventana_mensaje.addButton(QMessageBox.Ok) 
-            respuesta = ventana_mensaje.exec() 
+            respuesta = ventana_mensaje.exec()
+
 
             if(respuesta == QMessageBox.Ok):
 
@@ -163,7 +152,16 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
     def abrir_Ventana_Principal(self): 
         self.Objeto = Ventana_Principal()
         self.Objeto.show() 
-        self.hide() 
+        """current = ll.first
+        while(current):
+    
+            print(current.value.nombre)
+            current = current.next
+        
+        system("clear")"""
+        
+        self.hide()
+
     
 class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Editar_MainWindow):
 
@@ -200,7 +198,8 @@ if __name__ == "__main__":
     
     app = QtWidgets.QApplication(sys.argv)
     Ventana_Principal_MainWindow = Ventana_Principal()
-    
+
     Ventana_Principal_MainWindow.show()
 
     sys.exit(app.exec_())
+

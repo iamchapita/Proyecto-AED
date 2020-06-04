@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from Node import *
+class Node:
+    
+    def __init__(self, value):
+        
+        self.value = value 
+        self.next = None
 
 class LinkedList:
 
     def __init__(self):
         self.first = None
     
-    def push(self, value, position):
+    def push(self, value, position = 0):
         
         if(not isinstance(position,int) or position<0):
             return False
@@ -17,21 +22,24 @@ class LinkedList:
             return True
         
         count = 0
+
+        """
         current = self.first
 
         if(count == position):
-
+        
             self.first = Node(value)
             self.first.next = current
             return True
-        
+        """
+
         before = self.first
         current = self.first.next
     
         while(before):
 
             count += 1
-            if(count == position):
+            if(count == self.length()):
 
                 before.next = Node(value)    
                 before.next.next = current
