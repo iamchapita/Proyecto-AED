@@ -15,27 +15,25 @@ ll.push(obj3)
 
 current = ll.first
 
-json = '{"root":{\n'
+json = '{\n'
 contador = 0
 while(current):
     
     indice_str = "%s" %(str(contador))
-    json += '\t\t"%s":{\n' %(indice_str)
-    json += '\t\t\t"nombre":"%s",\n'%(current.value.nombre)
-    json += '\t\t\t"duracion":"%s",\n'%(current.value.duracion)
-    json += '\t\t\t"descripcion":"%s",\n'%(current.value.descripcion)
-    json += '\t\t\t"director":"%s",\n'%(current.value.director)
-    json += '\t\t\t"genero":"%s"\n'%(current.value.genero)
-    
+    json += '\t"%s":{\n' %(indice_str)
+    json += '\t\t\"nombre":"%s",\n'%(current.value.nombre)
+    json += '\t\t\"duracion":"%s",\n'%(current.value.duracion)
+    json += '\t\t\"descripcion":"%s",\n'%(current.value.descripcion)
+    json += '\t\t\"director":"%s",\n'%(current.value.director)
+    json += '\t\t\"genero":"%s"\n'%(current.value.genero)
+            
     if(current.next):
-        
-        json += '\t\t},\n'
-    
+                
+        json += '\t},\n'
+            
     else:
-        json += '\t\t}\n'
         json += '\t}\n'
         json += '}'
-
 
     current = current.next
     contador += 1
