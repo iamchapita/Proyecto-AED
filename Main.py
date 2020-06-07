@@ -7,6 +7,7 @@ from PyQt5.QtCore import *
 
 from os import system
 import datetime
+import ast
 
 from Nucleo import Acerca_de 
 from Nucleo import Agregar_Pélicula 
@@ -17,8 +18,10 @@ from Nucleo import Ventana_Principal
 from Nucleo import Ver_y_Editar_Péliculas
 from Nucleo.Información_Pélicula  import *
 from Nucleo.LinkedList import *
+from Nucleo.Manejador_de_Archivos import *
 
 ll = LinkedList()
+objeto = FileManager()
 
 class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
     
@@ -26,10 +29,12 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
             
         super(Ventana_Principal, self).__init__(parent)
         self.setupUi(self)
-        Center.center(self) 
+        Center.center(self)
+        self.actualizar_desde_JSON()
         self.Acerca_de_button.clicked.connect(self.abrir_Acerca_de) 
         self.Agregar_button.clicked.connect(self.abrir_Agregar_Pelicula) 
         self.Ver_y_editar_button.clicked.connect(self.abrir_Ver_y_Editar)
+        self.Numero_label.setText(str(ll.length()))
         
     def abrir_Acerca_de(self): 
 
@@ -39,13 +44,20 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
     def abrir_Agregar_Pelicula(self): 
         self.hide() 
         self.Agregar_Pelicula_ventana = Agregar_Pelicula()
-        self.Agregar_Pelicula_ventana.show() 
+        self.Agregar_Pelicula_ventana.show()
     
     def abrir_Ver_y_Editar(self): 
         self.hide()
         self.Ver_y_Editar_ventana = Ver_y_Editar_Peliculas()
         self.Ver_y_Editar_ventana.show() 
-    
+
+    def actualizar_desde_JSON(self):
+
+        dict = ast.literal_eval(objeto.readFile("Memoria/Péliculas_ingresadas.json"))
+
+        print(dict.keys())
+        #Falta convertir de JSON a LinkedList
+        
     def closeEvent(self, event): 
 
         cerrar = QMessageBox() 
@@ -142,27 +154,48 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
             ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
             ventana_mensaje.addButton(QMessageBox.Ok) 
             respuesta = ventana_mensaje.exec()
-
-
+            
             if(respuesta == QMessageBox.Ok):
-
+                
+                self.guardar_json()
                 ventana_mensaje.close()
                 self.abrir_Ventana_Principal() 
             
     def abrir_Ventana_Principal(self): 
+
         self.Objeto = Ventana_Principal()
         self.Objeto.show() 
-        """current = ll.first
-        while(current):
-    
-            print(current.value.nombre)
-            current = current.next
-        
-        system("clear")"""
-        
         self.hide()
 
+    def guardar_json(self):
+        
+        current = ll.first
+        contador = 0
+        json = '{\n'
+
+        while(current):
     
+            indice_str = "%s" %(str(contador))
+            json += '\t"%s":{\n' %(indice_str)
+            json += '\t\t\"nombre":"%s",\n'%(current.value.nombre)
+            json += '\t\t\"duracion":"%s",\n'%(current.value.duracion)
+            json += '\t\t\"descripcion":"%s",\n'%(current.value.descripcion)
+            json += '\t\t\"director":"%s",\n'%(current.value.director)
+            json += '\t\t\"genero":"%s"\n'%(current.value.genero)
+            
+            if(current.next):
+                
+                json += '\t},\n'
+            
+            else:
+                json += '\t}\n'
+                json += '}'
+
+            current = current.next
+            contador += 1
+
+        objeto.createFile("Memoria/Péliculas_ingresadas.json", json)
+      
 class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Editar_MainWindow):
 
     def __init__(self, parent = None):

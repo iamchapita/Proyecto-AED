@@ -12,3 +12,8 @@ class Info_Pelicula:
 
 
     
+#objeto = Info_Pelicula("Prueba", "03:02:02", "Solo de prueba", "Tarantino", "Terror")
+
+
+
+

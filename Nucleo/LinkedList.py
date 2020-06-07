@@ -96,8 +96,8 @@ class LinkedList:
         while(current):
 
             if(current.value == value):
-                print("El valor %s se encuentra en la posicion %s" %(value, count))
-
+                #print("El valor %s se encuentra en la posicion %s" %(value, count))
+                return count
             count += 1
             current = current.next
     
