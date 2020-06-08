@@ -1,23 +1,30 @@
 {
 	"0":{
-		"nombre":"Avengers",
-		"duracion":"03:03:3",
-		"descripcion":"oñioñi",
-		"director":"iolioli",
-		"genero":"Muertos vivientes "
+		"nombre":"Paisa",
+		"duracion":"09:09:09",
+		"descripcion":"Paisa",
+		"director":"Paisa",
+		"genero":"Hechos Reales"
 	},
 	"1":{
-		"nombre":"uilukj",
-		"duracion":"12:12:12",
-		"descripcion":"lijol",
-		"director":"kljlj",
-		"genero":"Muertos vivientes "
+		"nombre":"Paisa1",
+		"duracion":"09:09:09",
+		"descripcion":"Paisa1",
+		"director":"Paisa",
+		"genero":"Dibujos animados "
 	},
 	"2":{
-		"nombre":"iopiop",
-		"duracion":"08:10:12",
-		"descripcion":"hulijl",
-		"director":"lugilhj",
-		"genero":"Espada y Hechicería "
+		"nombre":"Paisa2",
+		"duracion":"09:09:09",
+		"descripcion":"Paisa2",
+		"director":"Paisa",
+		"genero":"Horror"
+	},
+	"3":{
+		"nombre":"Paisa4",
+		"duracion":"10:10:10",
+		"descripcion":"Paisa4",
+		"director":"Paisa",
+		"genero":"Dramáticas"
 	}
 }

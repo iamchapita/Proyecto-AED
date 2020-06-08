@@ -35,7 +35,7 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
         self.Agregar_button.clicked.connect(self.abrir_Agregar_Pelicula) 
         self.Ver_y_editar_button.clicked.connect(self.abrir_Ver_y_Editar)
         self.Numero_label.setText(str(ll.length()))
-        
+
     def abrir_Acerca_de(self): 
 
         self.Acerca_de_ventana = Acerca_de()
@@ -53,10 +53,21 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
 
     def actualizar_desde_JSON(self):
 
-        dict = ast.literal_eval(objeto.readFile("Memoria/Péliculas_ingresadas.json"))
-
-        print(dict.keys())
-        #Falta convertir de JSON a LinkedList
+        if(objeto.readFile("Memoria/Péliculas_ingresadas.json") and ll.length() == 0):
+        
+            dict = ast.literal_eval(objeto.readFile("Memoria/Péliculas_ingresadas.json"))
+            for i in range((len(dict))):
+                
+                #temp = str(count)
+                var = str(dict[str(i)])
+                var = var.split("'")
+                print(var[3])
+                print(var[7])
+                print(var[11])
+                print(var[15])
+                print(var[19])
+                instanica_Pelicula = Info_Pelicula(var[3], var[7], var[11], var[15], var[19])
+                ll.push(instanica_Pelicula)
         
     def closeEvent(self, event): 
 
