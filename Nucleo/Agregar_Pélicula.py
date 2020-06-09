@@ -140,9 +140,6 @@ class Ui_Agregar_MainWindow(object):
         self.Cancelar_pushButton.setFlat(False)
         self.Cancelar_pushButton.setObjectName("Cancelar_pushButton")
         self.Descripcion_textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        #self.Descripcion_regex = QtCore.QRegExp("[a-z A-Z 0-9]+")
-        #self.Descripcion_validator = QtGui.QRegExpValidator(self.Descripcion_regex, self.Descripcion_textEdit)
-        #self.Descripcion_textEdit.setValidator(self.Descripcion_validator)
         self.Descripcion_textEdit.setGeometry(QtCore.QRect(40, 130, 681, 141))
         self.Descripcion_textEdit.setStyleSheet("color:black;\n"
 "font: 10pt \"Hack\";\n"

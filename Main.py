@@ -61,11 +61,6 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
                 #temp = str(count)
                 var = str(dict[str(i)])
                 var = var.split("'")
-                print(var[3])
-                print(var[7])
-                print(var[11])
-                print(var[15])
-                print(var[19])
                 instanica_Pelicula = Info_Pelicula(var[3], var[7], var[11], var[15], var[19])
                 ll.push(instanica_Pelicula)
         
@@ -211,8 +206,9 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
 
     def __init__(self, parent = None):
         super(Ver_y_Editar_Peliculas, self).__init__(parent)
-        self.setupUi(self) 
-        Center.center(self)  
+        self.setupUi(self)
+        Center.center(self)
+        self.textEdit.setPlainText(self.cargar_ASCII())
     
     def closeEvent(self, event3): 
 
@@ -236,6 +232,61 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
         self.Objeto = Ventana_Principal()
         self.Objeto.show()
         self.hide()
+
+    def cargar_ASCII(self):
+
+        prueba = ("--"*84)
+        prueba += "\n"
+        prueba += "\t\t\t\t\t\t\t\tInventario de Productos"
+        prueba += "\n"
+        prueba += ("--"*84)
+        prueba += "\n"
+        prueba += "id    | Nombre                                           | Duración    | Descripción                                | Director               | Género                  |"
+        prueba += "\n"
+        prueba += ("--"*84)
+        prueba += "\n"
+
+        current = ll.first
+        count = 1
+
+        while(current):
+
+            prueba += ("%s%s%s" %(str(count)," "*(6-len(str(count))),"|"))
+            nombre = current.value.nombre
+            h, m, s = current.value.duracion.split(":")
+            tiempo = int(h)*3600 + int(m)*60 + int(s)
+            descripcion = current.value.descripcion
+            director = current.value.director
+            genero = current.value.genero
+
+            prueba += (" %s%s%s"%(nombre, " "*(49-len(nombre)),"|"))
+            prueba += (" %s seg.%s%s"%(str(tiempo), " "*(7-len(str(tiempo))),"|"))
+            
+            if(len(descripcion) > 44):
+                descripcion = descripcion[0:40]
+                descripcion += "..."
+                prueba += (" %s%s" %(descripcion,"|"))
+            
+            else:
+                prueba += (" %s%s%s" %(descripcion," "*(43-len(descripcion)), "|"))
+            
+            if(len(director) > 24):
+                director = director[0:20]
+                director += "..."
+                prueba += (" %s%s" %(director, "|"))
+
+            else:
+                prueba += (" %s%s%s" %(director, " "*(23-len(director)),"|"))
+            
+            prueba += (" %s%s%s" %(genero, " "*(24-len(genero)),"|"))
+            prueba += "\n"
+            prueba += ("--"*84)
+            prueba += "\n"
+            count += 1
+            current = current.next
+        
+        return prueba
+        
 
 #Función Main
 if __name__ == "__main__":

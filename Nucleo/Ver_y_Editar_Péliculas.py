@@ -9,13 +9,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Ver_y_Editar_MainWindow(object):
 
+class Ui_Ver_y_Editar_MainWindow(object):
     def setupUi(self, Ver_y_Editar_MainWindow):
-            
         Ver_y_Editar_MainWindow.setObjectName("Ver_y_Editar_MainWindow")
-        sizeObject = QtWidgets.QDesktopWidget().screenGeometry(0)
-        Ver_y_Editar_MainWindow.setGeometry(QtCore.QRect((sizeObject.height()/2),(sizeObject.width()/2),480,548))
         Ver_y_Editar_MainWindow.resize(762, 456)
         Ver_y_Editar_MainWindow.setMinimumSize(QtCore.QSize(762, 456))
         Ver_y_Editar_MainWindow.setMaximumSize(QtCore.QSize(762, 456))
@@ -23,30 +20,11 @@ class Ui_Ver_y_Editar_MainWindow(object):
         font.setFamily("Hack")
         Ver_y_Editar_MainWindow.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Ver_y_Editar_MainWindow.setWindowIcon(icon)
         Ver_y_Editar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);")
         self.centralwidget = QtWidgets.QWidget(Ver_y_Editar_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(20, 20, 721, 331))
-        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border:3px;\n"
-"border-color: rgb(0, 0, 0);\n"
-"")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.horizontalScrollBar = QtWidgets.QScrollBar(self.frame)
-        self.horizontalScrollBar.setGeometry(QtCore.QRect(40, 300, 641, 16))
-        self.horizontalScrollBar.setStyleSheet("background-color:rgb(204, 204, 204);")
-        self.horizontalScrollBar.setOrientation(QtCore.Qt.Horizontal)
-        self.horizontalScrollBar.setObjectName("horizontalScrollBar")
-        self.verticalScrollBar = QtWidgets.QScrollBar(self.frame)
-        self.verticalScrollBar.setGeometry(QtCore.QRect(690, 30, 20, 251))
-        self.verticalScrollBar.setStyleSheet("background-color:rgb(204, 204, 204);")
-        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
-        self.verticalScrollBar.setObjectName("verticalScrollBar")
         self.ID_textEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.ID_textEdit.setGeometry(QtCore.QRect(153, 360, 131, 71))
         self.ID_textEdit.setStyleSheet("color:black;\n"
@@ -76,6 +54,22 @@ class Ui_Ver_y_Editar_MainWindow(object):
 "border-width: 0.5px;\n"
 "border-radius: 35px;")
         self.Borrar_pushButton_2.setObjectName("Borrar_pushButton_2")
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.setGeometry(QtCore.QRect(20, 20, 701, 311))
+        font = QtGui.QFont()
+        font.setFamily("Hack")
+        font.setPointSize(8)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.textEdit.setFont(font)
+        self.textEdit.setStyleSheet("font: 8pt \"Hack\";\n"
+"background-color: rgb(255, 255, 255);\n"
+"color:black;")
+        self.textEdit.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
+        self.textEdit.setLineWrapColumnOrWidth(0)
+        self.textEdit.setTextInteractionFlags(QtCore.Qt.TextEditorInteraction)
+        self.textEdit.setObjectName("textEdit")
         Ver_y_Editar_MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(Ver_y_Editar_MainWindow)
         self.statusbar.setObjectName("statusbar")
