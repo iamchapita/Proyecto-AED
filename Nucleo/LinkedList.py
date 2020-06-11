@@ -23,22 +23,13 @@ class LinkedList:
         
         count = 0
 
-        """
-        current = self.first
-
-        if(count == position):
-        
-            self.first = Node(value)
-            self.first.next = current
-            return True
-        """
-
         before = self.first
         current = self.first.next
     
         while(before):
 
             count += 1
+
             if(count == self.length()):
 
                 before.next = Node(value)    
@@ -50,7 +41,34 @@ class LinkedList:
             
         current = Node(value)
         return True
+
+    def push_in(self, value, position = 0):
+
+        count = 0
+
+        current = self.first
+
+        if(count == position):
+        
+            self.first = Node(value)
+            self.first.next = current
+            return True
+
+        before = self.first
+        current = self.first.next
     
+        while(before):
+            
+            count += 1
+            if(count == position):
+
+                before.next = Node(value)    
+                before.next.next = current
+                return True
+                
+            before = before.next
+            current = current.next
+            
     def print(self):
 
         current = self.first
@@ -58,7 +76,7 @@ class LinkedList:
 
         while(current):
 
-            string += (("%s => ")%(current.value))
+            string += (("%s => ")%(current.value.nombre))
             current = current.next
         
         string += "null"
@@ -70,13 +88,17 @@ class LinkedList:
         before = self.first
         current = self.first.next
 
-        if(position == 0):
+        if(position == 0 and self.length() > 1):
             
             after = self.first.next.next
             self.first = Node(self.first.next.value)
             self.first.next = after
             return True
         
+        if(self.length() == 1):
+
+            self.first = None
+            
         while(current):
 
             if(count == position):
@@ -87,17 +109,17 @@ class LinkedList:
             count += 1
             before = before.next
             current = current.next
-    
-    def search(self, value):
+               
+    def search(self, position):
 
         current = self.first
         count = 0
 
         while(current):
 
-            if(current.value == value):
-                #print("El valor %s se encuentra en la posicion %s" %(value, count))
-                return count
+            if(position == count):
+                return current, count
+                
             count += 1
             current = current.next
     
@@ -112,3 +134,4 @@ class LinkedList:
             current = current.next
             
         return count
+    

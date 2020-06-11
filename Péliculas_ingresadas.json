@@ -1,0 +1,30 @@
+{
+	"0":{
+		"nombre":"Avengers 1",
+		"duracion":"09:09:01",
+		"descripcion":"asfgvrsdfgvs",
+		"director":"zfsngdfgn",
+		"genero":"Deportivas"
+	},
+	"1":{
+		"nombre":"Avengers 2",
+		"duracion":"09:02:09",
+		"descripcion":"asdfasdfasdf",
+		"director":"asdfasdfasdf",
+		"genero":"Deportivas"
+	},
+	"2":{
+		"nombre":"Avengers 3",
+		"duracion":"02:02:02",
+		"descripcion":"ldsknvosinvsdf",
+		"director":"asdfvsdfbvsd",
+		"genero":"Dramáticas"
+	},
+	"3":{
+		"nombre":"Avengers 4",
+		"duracion":"04:04:04",
+		"descripcion":"LJFNÑOASDBFÑAS",
+		"director":"IPDNBOSDINF",
+		"genero":"Terror"
+	}
+}

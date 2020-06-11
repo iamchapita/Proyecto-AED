@@ -19,7 +19,8 @@ class Ui_Agregar_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Nucleo/Imagenes/logos-UNAH-600x600.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Agregar_MainWindow.setWindowIcon(icon)
-        Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n")
+        Agregar_MainWindow.setStyleSheet("background-color:rgb(204, 204, 204);\n"
+"")
         self.centralwidget = QtWidgets.QWidget(Agregar_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Nombre_lineEdit = QtWidgets.QLineEdit(self.centralwidget)
@@ -34,6 +35,9 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QLineEdit::{\n"
+"sizeHint(10);\n"
 "}")
         self.Nombre_lineEdit.setText("")
         self.Nombre_lineEdit.setMaxLength(50)
@@ -51,6 +55,9 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QLineEdit::{\n"
+"sizeHint(10);\n"
 "}")
         self.Duracion_lineEdit.setText("")
         self.Duracion_lineEdit.setMaxLength(8)
@@ -68,6 +75,9 @@ class Ui_Agregar_MainWindow(object):
 "color:black;\n"
 "border-color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QLineEdit::{\n"
+"sizeHint(10);\n"
 "}")
         self.Director_lineEdit.setText("")
         self.Director_lineEdit.setMaxLength(50)

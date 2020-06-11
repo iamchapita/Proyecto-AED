@@ -2,7 +2,7 @@
 
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget 
+from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget, QButtonGroup
 from PyQt5.QtCore import *
 
 from os import system
@@ -22,6 +22,7 @@ from Nucleo.Manejador_de_Archivos import *
 
 ll = LinkedList()
 objeto = FileManager()
+posicion = 0
 
 class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
     
@@ -32,9 +33,10 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
         Center.center(self)
         self.actualizar_desde_JSON()
         self.Acerca_de_button.clicked.connect(self.abrir_Acerca_de) 
-        self.Agregar_button.clicked.connect(self.abrir_Agregar_Pelicula) 
+        self.Agregar_Principal_button.clicked.connect(self.abrir_Agregar_Pelicula) 
         self.Ver_y_editar_button.clicked.connect(self.abrir_Ver_y_Editar)
         self.Numero_label.setText(str(ll.length()))
+
 
     def abrir_Acerca_de(self): 
 
@@ -91,13 +93,13 @@ class Acerca_de(QMainWindow, Acerca_de.Ui_MainWindow):
 
 class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
 
-    def __init__(self, parent = None ):
+    def __init__(self, parent = None):
 
         super(Agregar_Pelicula, self).__init__(parent)
         self.setupUi(self)
-        Center.center(self) 
-        self.Agregar_pushButton.clicked.connect(self.validando_Agregar) 
+        Center.center(self)
         self.Cancelar_pushButton.clicked.connect(self.close)
+        self.Agregar_pushButton.clicked.connect(self.validando_Agregar)
 
     def closeEvent(self, event2): 
 
@@ -156,6 +158,7 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
             objeto_Pelicula = Info_Pelicula(self.Nombre_lineEdit.text(), self.Duracion_lineEdit.text(), 
             self.Descripcion_textEdit.toPlainText(), self.Director_lineEdit.text(), self.comboBox.currentText())
             ll.push(objeto_Pelicula)
+            print("paso por agregar")
             ventana_mensaje.setWindowTitle("Exito") 
             ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
             ventana_mensaje.addButton(QMessageBox.Ok) 
@@ -166,42 +169,49 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
                 self.guardar_json()
                 ventana_mensaje.close()
                 self.abrir_Ventana_Principal() 
-            
+
+    def guardar_json(self):
+        
+        current = ll.first
+
+        if(current):
+
+            contador = 0
+            json = '{\n'
+
+            while(current):
+        
+                indice_str = "%s" %(str(contador))
+                json += '\t"%s":{\n' %(indice_str)
+                json += '\t\t\"nombre":"%s",\n'%(current.value.nombre)
+                json += '\t\t\"duracion":"%s",\n'%(current.value.duracion)
+                json += '\t\t\"descripcion":"%s",\n'%(current.value.descripcion)
+                json += '\t\t\"director":"%s",\n'%(current.value.director)
+                json += '\t\t\"genero":"%s"\n'%(current.value.genero)
+                
+                if(current.next):
+                    
+                    json += '\t},\n'
+                
+                else:
+                    json += '\t}\n'
+                    json += '}'
+
+                current = current.next
+                contador += 1
+
+            objeto.createFile("Memoria/Péliculas_ingresadas.json", json)        
+
+        else:
+            json = ""
+            objeto.createFile("Memoria/Péliculas_ingresadas.json", json)        
+
     def abrir_Ventana_Principal(self): 
 
         self.Objeto = Ventana_Principal()
         self.Objeto.show() 
         self.hide()
 
-    def guardar_json(self):
-        
-        current = ll.first
-        contador = 0
-        json = '{\n'
-
-        while(current):
-    
-            indice_str = "%s" %(str(contador))
-            json += '\t"%s":{\n' %(indice_str)
-            json += '\t\t\"nombre":"%s",\n'%(current.value.nombre)
-            json += '\t\t\"duracion":"%s",\n'%(current.value.duracion)
-            json += '\t\t\"descripcion":"%s",\n'%(current.value.descripcion)
-            json += '\t\t\"director":"%s",\n'%(current.value.director)
-            json += '\t\t\"genero":"%s"\n'%(current.value.genero)
-            
-            if(current.next):
-                
-                json += '\t},\n'
-            
-            else:
-                json += '\t}\n'
-                json += '}'
-
-            current = current.next
-            contador += 1
-
-        objeto.createFile("Memoria/Péliculas_ingresadas.json", json)
-      
 class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Editar_MainWindow):
 
     def __init__(self, parent = None):
@@ -209,7 +219,12 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
         self.setupUi(self)
         Center.center(self)
         self.textEdit.setPlainText(self.cargar_ASCII())
-    
+        self.Editar_pushButton.clicked.connect(self.abrir_Editar)
+        self.Borrar_pushButton.clicked.connect(self.eliminar)
+        self.Agregar_Objeto = Agregar_Pelicula()
+        self.Agregar_Objeto.Agregar_pushButton.disconnect()
+        self.Agregar_Objeto.Agregar_pushButton.clicked.connect(self.modificar_entrada)
+
     def closeEvent(self, event3): 
 
         cerrar3 = QMessageBox()
@@ -237,7 +252,7 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
 
         prueba = ("--"*84)
         prueba += "\n"
-        prueba += "\t\t\t\t\t\t\t\tInventario de Productos"
+        prueba += "\t\t\t\t\t\tInventario de Productos"
         prueba += "\n"
         prueba += ("--"*84)
         prueba += "\n"
@@ -287,7 +302,168 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
         
         return prueba
         
+    def abrir_Editar(self):
+        
+        mensaje = QMessageBox()
+        mensaje.setIcon(QMessageBox.Warning)
 
+        try:
+            ID = int(self.ID_lineEdit.text())-1
+
+            if(int(ID) < 0 or int(ID)+1 > ll.length()):
+
+                mensaje.setWindowTitle("Error")
+                mensaje.setText("Error, el ID ingresado no es válido")
+                mensaje.addButton(QMessageBox.Ok)
+                mensaje.exec()
+
+            else:
+
+                mensaje.setWindowTitle("Editar")
+                mensaje.setText("¿Está seguro que desea editar el elemento %d?" %(int(ID)+1))
+                mensaje.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+                respuesta = mensaje.exec()
+
+                if(respuesta == QMessageBox.Yes):
+                    
+                    self.hide()
+                    current, pos = ll.search(ID)
+                    global posicion
+                    posicion = pos
+                    self.Agregar_Objeto.Nombre_lineEdit.setText(current.value.nombre)
+                    self.Agregar_Objeto.Duracion_lineEdit.setText(current.value.duracion)
+                    self.Agregar_Objeto.Descripcion_textEdit.setText(current.value.descripcion)
+                    self.Agregar_Objeto.Director_lineEdit.setText(current.value.director)
+                    self.Agregar_Objeto.comboBox.setCurrentText(current.value.genero)
+                    self.Agregar_Objeto.show()
+
+        except ValueError:
+            
+            mensaje.setWindowTitle("Error")
+            mensaje.setText("Error, el ID ingresado no es válido")
+            mensaje.addButton(QMessageBox.Ok)
+            mensaje.exec()    
+    
+    def modificar_entrada(self):
+        
+        global posicion
+
+        current, posicion_editar = ll.search(posicion)
+
+        boolean = False
+        #Boolean True si se ha modificado algo
+
+        if(self.Agregar_Objeto.Nombre_lineEdit.isModified()):
+            boolean = True
+            
+        if(self.Agregar_Objeto.Duracion_lineEdit.isModified()):
+            boolean = True
+
+        if(self.Agregar_Objeto.Descripcion_textEdit.toPlainText() is current.value.descripcion):
+            boolean = True
+
+        if(self.Agregar_Objeto.Director_lineEdit.isModified()):
+            boolean = True
+
+        if(self.Agregar_Objeto.comboBox.currentText() != current.value.genero):
+            boolean = True
+        
+        if(boolean):
+            self.validar_campos_editados()
+        
+    def validar_campos_editados(self):
+        
+        global posicion
+
+        ventana_mensaje = QMessageBox()
+        ventana_mensaje.setIcon(QMessageBox.Information)
+
+        cadena = "Campos no válidos:\n"
+        
+        if(len(self.Agregar_Objeto.Nombre_lineEdit.text()) == 0):
+            cadena += "  Nombre de la Pélicula\n"
+            
+        formato_hora = "%H:%M:%S"
+            
+        try:
+            validtime = datetime.datetime.strptime(self.Agregar_Objeto.Duracion_lineEdit.text(), formato_hora)
+                
+        except ValueError:
+            cadena += "  Duración de la Pélicula\n"
+
+        if(len(self.Agregar_Objeto.Descripcion_textEdit.toPlainText()) == 0):
+            cadena += "  Descripción de la Pélicula\n"
+
+        if(len(self.Agregar_Objeto.Director_lineEdit.text()) == 0):
+            cadena += "  Director de la Pélicula\n"
+        
+        if(self.Agregar_Objeto.comboBox.currentText() == "----Seleccione un Género----"):
+            cadena += "  Género de la Pélicula"
+
+        if(cadena != "Campos no válidos:\n"):
+            
+            ventana_mensaje.setWindowTitle("Error") 
+            ventana_mensaje.setText("%s"%(cadena)) 
+            ventana_mensaje.addButton(QMessageBox.Ok) 
+            respuesta = ventana_mensaje.exec()  
+
+        else:
+            
+            objeto_Pelicula = Info_Pelicula(self.Agregar_Objeto.Nombre_lineEdit.text(), self.Agregar_Objeto.Duracion_lineEdit.text(), 
+            self.Agregar_Objeto.Descripcion_textEdit.toPlainText(), self.Agregar_Objeto.Director_lineEdit.text(), self.Agregar_Objeto.comboBox.currentText())
+
+            ll.delete(posicion)
+            ll.push_in(objeto_Pelicula,posicion)
+
+            ventana_mensaje.setWindowTitle("Exito") 
+            ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
+            ventana_mensaje.addButton(QMessageBox.Ok) 
+            respuesta = ventana_mensaje.exec()
+            
+            if(respuesta == QMessageBox.Ok):
+            
+                self.Agregar_Objeto.guardar_json()
+                ventana_mensaje.close()
+                self.Agregar_Objeto.abrir_Ventana_Principal() 
+
+    def eliminar(self):
+
+        mensaje = QMessageBox()
+        mensaje.setIcon(QMessageBox.Warning)
+
+        try:
+            ID = int(self.ID_lineEdit.text())-1
+
+            if(int(ID) < 0 or int(ID)+1 > ll.length()):
+
+                mensaje.setWindowTitle("Error")
+                mensaje.setText("Error, el ID ingresado no es válido")
+                mensaje.addButton(QMessageBox.Ok)
+                mensaje.exec()
+
+            else:
+
+                mensaje.setWindowTitle("Editar")
+                mensaje.setText("¿Está seguro que desea eliminar el elemento %d?" %(int(ID)+1))
+                mensaje.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+                respuesta = mensaje.exec()
+
+                if(respuesta == QMessageBox.Yes):
+                    
+                    self.hide()
+                    ll.delete(ID)
+                    self.Agregar_Objeto = Agregar_Pelicula()
+                    self.Agregar_Objeto.guardar_json()
+                    self.Objeto_Ventana_Principal = Ventana_Principal()
+                    self.Objeto_Ventana_Principal.show()
+
+        except ValueError:
+            
+            mensaje.setWindowTitle("Error")
+            mensaje.setText("Error, el ID ingresado no es válido")
+            mensaje.addButton(QMessageBox.Ok)
+            mensaje.exec()    
+        
 #Función Main
 if __name__ == "__main__":
     

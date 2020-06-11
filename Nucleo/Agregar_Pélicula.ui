@@ -48,6 +48,9 @@
       <family>Hack</family>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 color:black;
@@ -84,6 +87,9 @@ sizeHint(10);
      <font>
       <family>Hack</family>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
@@ -122,6 +128,9 @@ sizeHint(10);
       <family>Hack</family>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
 color:black;
@@ -158,6 +167,9 @@ sizeHint(10);
      <font>
       <family>Hack</family>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">color:black;
@@ -403,6 +415,9 @@ border-radius: 30px;</string>
       <width>681</width>
       <height>141</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">color:black;

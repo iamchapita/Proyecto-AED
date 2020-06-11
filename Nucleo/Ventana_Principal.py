@@ -22,18 +22,18 @@ class Ui_Principal_MainWindow(object):
         Principal_MainWindow.setStyleSheet("background-color: rgb(255, 255, 255)")
         self.centralwidget = QtWidgets.QWidget(Principal_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.Agregar_button = QtWidgets.QPushButton(self.centralwidget)
-        self.Agregar_button.setGeometry(QtCore.QRect(90, 320, 301, 61))
-        self.Agregar_button.setStyleSheet("background-color: rgb(146, 196, 125);\n"
+        self.Agregar_Principal_button = QtWidgets.QPushButton(self.centralwidget)
+        self.Agregar_Principal_button.setGeometry(QtCore.QRect(90, 320, 301, 61))
+        self.Agregar_Principal_button.setStyleSheet("background-color: rgb(146, 196, 125);\n"
 "font: 10pt \"Hack\";\n"
 "border-style: solid;\n"
 "border-color: black;\n"
 "border-width: 0.5px;\n"
 "border-radius: 30px;")
-        self.Agregar_button.setShortcut("")
-        self.Agregar_button.setDefault(False)
-        self.Agregar_button.setFlat(False)
-        self.Agregar_button.setObjectName("Agregar_button")
+        self.Agregar_Principal_button.setShortcut("")
+        self.Agregar_Principal_button.setDefault(False)
+        self.Agregar_Principal_button.setFlat(False)
+        self.Agregar_Principal_button.setObjectName("Agregar_button")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(100, 250, 301, 41))
         self.label.setStyleSheet("font-size:35px;\n"
@@ -94,7 +94,7 @@ class Ui_Principal_MainWindow(object):
     def retranslateUi(self, Principal_MainWindow):
         _translate = QtCore.QCoreApplication.translate
         Principal_MainWindow.setWindowTitle(_translate("Principal_MainWindow", "Principal"))
-        self.Agregar_button.setText(_translate("Principal_MainWindow", "Agregar"))
+        self.Agregar_Principal_button.setText(_translate("Principal_MainWindow", "Agregar"))
         self.label.setText(_translate("Principal_MainWindow", "Péliculas en total"))
         self.Acerca_de_button.setText(_translate("Principal_MainWindow", "Acerca de"))
         self.Numero_label.setText(_translate("Principal_MainWindow", "0"))

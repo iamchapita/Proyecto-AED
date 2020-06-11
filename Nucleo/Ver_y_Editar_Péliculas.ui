@@ -38,29 +38,6 @@
    <string notr="true">background-color:rgb(204, 204, 204);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="ID_textEdit">
-    <property name="geometry">
-     <rect>
-      <x>153</x>
-      <y>360</y>
-      <width>131</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:black;
-font: 75 10pt &quot;Hack&quot;;
-background-color: rgb(255, 255, 255);
-border-color: rgb(0, 0, 0);
-border-style: solid;
-border-color: black;
-border-width: 0.5px;
-</string>
-    </property>
-    <property name="placeholderText">
-     <string>Ingrese el número del ID a Editar o Borrar</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Editar_pushButton">
     <property name="geometry">
      <rect>
@@ -108,8 +85,8 @@ border-radius: 35px;</string>
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>701</width>
-      <height>311</height>
+      <width>721</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="font">
@@ -133,7 +110,33 @@ color:black;</string>
      <number>0</number>
     </property>
     <property name="textInteractionFlags">
-     <set>Qt::TextEditorInteraction</set>
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ID_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>380</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Hack</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="placeholderText">
+     <string>N° de Item a borrar o eliminar</string>
     </property>
    </widget>
   </widget>
