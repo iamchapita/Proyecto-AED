@@ -22,6 +22,9 @@
     <height>479</height>
    </size>
   </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
    <string>Agregar Pélicula</string>
   </property>
@@ -416,6 +419,9 @@ border-radius: 30px;</string>
       <height>141</height>
      </rect>
     </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>IBeamCursor</cursorShape>
+    </property>
     <property name="focusPolicy">
      <enum>Qt::TabFocus</enum>
     </property>
@@ -425,6 +431,12 @@ font: 10pt &quot;Hack&quot;;
 border-width: 3px;
 border-color: rgb(0, 0, 0);
 background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhMultiLine</set>
+    </property>
+    <property name="tabChangesFocus">
+     <bool>true</bool>
     </property>
     <property name="placeholderText">
      <string>Descripción de la Pélicula</string>

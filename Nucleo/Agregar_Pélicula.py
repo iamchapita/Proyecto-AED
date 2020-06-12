@@ -151,6 +151,7 @@ class Ui_Agregar_MainWindow(object):
         self.Cancelar_pushButton.setObjectName("Cancelar_pushButton")
         self.Descripcion_textEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.Descripcion_textEdit.setGeometry(QtCore.QRect(40, 130, 681, 141))
+        self.Descripcion_textEdit.setTabChangesFocus(True)
         self.Descripcion_textEdit.setStyleSheet("color:black;\n"
 "font: 10pt \"Hack\";\n"
 "border-width: 3px;\n"

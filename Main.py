@@ -3,7 +3,7 @@
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget, QButtonGroup
-from PyQt5.QtCore import *
+#from PyQt5.QtCore import 
 
 from os import system
 import datetime
@@ -36,7 +36,7 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
         self.Agregar_Principal_button.clicked.connect(self.abrir_Agregar_Pelicula) 
         self.Ver_y_editar_button.clicked.connect(self.abrir_Ver_y_Editar)
         self.Numero_label.setText(str(ll.length()))
-
+        self.Visualizacion_button.clicked.connect(self.abrir_visualizacion)
 
     def abrir_Acerca_de(self): 
 
@@ -52,6 +52,17 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
         self.hide()
         self.Ver_y_Editar_ventana = Ver_y_Editar_Peliculas()
         self.Ver_y_Editar_ventana.show() 
+
+    def abrir_visualizacion(self):
+        mensaje = QMessageBox()
+        mensaje.setIcon(QMessageBox.Warning)
+        mensaje.setWindowTitle("Ay")
+        mensaje.setText("No hay nada\nVuelva Pronto")
+        mensaje.exec()
+        respuesta = mensaje.addButton(QMessageBox.Ok)
+
+        if(respuesta == QMessageBox.Ok):
+            mensaje.close()
 
     def actualizar_desde_JSON(self):
 
@@ -103,22 +114,51 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
 
     def closeEvent(self, event2): 
 
-        cerrar1 = QMessageBox()
-        cerrar1.setIcon(QMessageBox.Warning)
-        cerrar1.setWindowTitle("Salir") 
-        cerrar1.setText("<p align='center'>¿Está seguro que desea salir?\n<p align='center'>Esta acción descartará los cambios hechos") 
-        cerrar1.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
-        cerrar1 = cerrar1.exec()
+        boolean = False
+        #Boolean True si están vacios los campos
 
-        if cerrar1 == QMessageBox.Yes:
-
-            self.abrir_Ventana_Principal() 
-            event2.accept() 
-        
-        else:
+        if(self.Nombre_lineEdit.text() == ""):
+            boolean = True
             
-            event2.ignore() 
-    
+        if(self.Duracion_lineEdit.text() == ""):
+            boolean = True
+
+        if(self.Descripcion_textEdit.toPlainText() == ""):
+            boolean = True
+
+        if(self.Director_lineEdit.text() == ""):
+            boolean = True
+
+        if(self.comboBox.currentText() == ""):
+            boolean = True
+
+        if(boolean == False):
+
+            cerrar1 = QMessageBox()
+            cerrar1.setIcon(QMessageBox.Warning)
+            cerrar1.setWindowTitle("Salir") 
+            cerrar1.setText("<p align='center'>¿Está seguro que desea salir?\n<p align='center'>Esta acción descartará los cambios hechos") 
+            cerrar1.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
+            cerrar1 = cerrar1.exec()
+
+            if cerrar1 == QMessageBox.Yes:
+
+                self.abrir_Ventana_Principal() 
+                event2.accept() 
+            
+            else:
+                
+                event2.ignore() 
+
+        else:
+            self.abrir_Ventana_Principal()
+
+    def keyPressEvent(self, event):
+        
+        if(self.Agregar_pushButton.hasFocus() and event.key() == QtCore.Qt.Key_Return):
+
+            self.Agregar_pushButton.click()
+
     def validando_Agregar(self): 
 
         ventana_mensaje = QMessageBox()
@@ -155,10 +195,11 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
 
         else:
             
+            temp = self.Descripcion_textEdit.toPlainText()
+            temp = temp.replace("\n"," ")
             objeto_Pelicula = Info_Pelicula(self.Nombre_lineEdit.text(), self.Duracion_lineEdit.text(), 
-            self.Descripcion_textEdit.toPlainText(), self.Director_lineEdit.text(), self.comboBox.currentText())
+            temp, self.Director_lineEdit.text(), self.comboBox.currentText())
             ll.push(objeto_Pelicula)
-            print("paso por agregar")
             ventana_mensaje.setWindowTitle("Exito") 
             ventana_mensaje.setText("<p align='center'>Se ha Agregado con Exito") 
             ventana_mensaje.addButton(QMessageBox.Ok) 
@@ -219,29 +260,40 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
         self.setupUi(self)
         Center.center(self)
         self.textEdit.setPlainText(self.cargar_ASCII())
-        self.Editar_pushButton.clicked.connect(self.abrir_Editar)
+        self.Editar_pushButton.clicked.connect(self.validar_editar)
         self.Borrar_pushButton.clicked.connect(self.eliminar)
         self.Agregar_Objeto = Agregar_Pelicula()
         self.Agregar_Objeto.Agregar_pushButton.disconnect()
         self.Agregar_Objeto.Agregar_pushButton.clicked.connect(self.modificar_entrada)
 
+    def keyPressEvent(self, event):
+
+        self.Editar_pushButton.setFocus()
+
+        if(self.Editar_pushButton.hasFocus() and event.key() == QtCore.Qt.Key_Return):
+            self.validar_editar()
+            
     def closeEvent(self, event3): 
 
-        cerrar3 = QMessageBox()
-        cerrar3.setIcon(QMessageBox.Warning)
-        cerrar3.setWindowTitle("Salir")
-        cerrar3.setText("<p align='center'>¿Está seguro que desea salir?")
-        cerrar3.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
-        cerrar3 = cerrar3.exec() 
+        if(self.ID_lineEdit.text() != ""):
 
-        if cerrar3 == QMessageBox.Yes:
+            cerrar3 = QMessageBox()
+            cerrar3.setIcon(QMessageBox.Warning)
+            cerrar3.setWindowTitle("Salir")
+            cerrar3.setText("<p align='center'>¿Está seguro que desea salir?")
+            cerrar3.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel) 
+            cerrar3 = cerrar3.exec() 
 
-            self.abrir_Ventana_Principal() 
-            event3.accept() 
-        
-        else:
+            if cerrar3 == QMessageBox.Yes:
+
+                self.abrir_Ventana_Principal() 
+                event3.accept() 
             
-            event3.ignore() 
+            else:
+                
+              event3.ignore() 
+        
+        self.abrir_Ventana_Principal()
 
     def abrir_Ventana_Principal(self): 
         self.Objeto = Ventana_Principal()
@@ -302,11 +354,11 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
         
         return prueba
         
-    def abrir_Editar(self):
+    def validar_editar(self):
         
         mensaje = QMessageBox()
         mensaje.setIcon(QMessageBox.Warning)
-
+    
         try:
             ID = int(self.ID_lineEdit.text())-1
 
@@ -334,8 +386,8 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
                     self.Agregar_Objeto.Duracion_lineEdit.setText(current.value.duracion)
                     self.Agregar_Objeto.Descripcion_textEdit.setText(current.value.descripcion)
                     self.Agregar_Objeto.Director_lineEdit.setText(current.value.director)
-                    self.Agregar_Objeto.comboBox.setCurrentText(current.value.genero)
                     self.Agregar_Objeto.show()
+                    self.Agregar_Objeto.comboBox.setCurrentText(current.value.genero)
 
         except ValueError:
             
@@ -345,9 +397,8 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
             mensaje.exec()    
     
     def modificar_entrada(self):
-        
+            
         global posicion
-
         current, posicion_editar = ll.search(posicion)
 
         boolean = False
@@ -408,9 +459,10 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
             respuesta = ventana_mensaje.exec()  
 
         else:
-            
+            temp = self.Agregar_Objeto.Descripcion_textEdit.toPlainText()
+            temp = temp.replace("\n"," ")
             objeto_Pelicula = Info_Pelicula(self.Agregar_Objeto.Nombre_lineEdit.text(), self.Agregar_Objeto.Duracion_lineEdit.text(), 
-            self.Agregar_Objeto.Descripcion_textEdit.toPlainText(), self.Agregar_Objeto.Director_lineEdit.text(), self.Agregar_Objeto.comboBox.currentText())
+            temp, self.Agregar_Objeto.Director_lineEdit.text(), self.Agregar_Objeto.comboBox.currentText())
 
             ll.delete(posicion)
             ll.push_in(objeto_Pelicula,posicion)
