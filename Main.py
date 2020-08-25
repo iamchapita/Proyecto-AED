@@ -3,11 +3,11 @@
 from PyQt5 import uic
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QWidget, QApplication, QMainWindow, QMessageBox, QWidget, QButtonGroup
-#from PyQt5.QtCore import 
 
 from os import system
 import datetime
 import ast
+import os
 
 from Nucleo import Acerca_de 
 from Nucleo import Agregar_Pélicula 
@@ -19,6 +19,7 @@ from Nucleo import Ver_y_Editar_Péliculas
 from Nucleo.Información_Pélicula  import *
 from Nucleo.LinkedList import *
 from Nucleo.Manejador_de_Archivos import *
+from Memoria import *
 
 ll = LinkedList()
 objeto = FileManager()
@@ -66,12 +67,14 @@ class Ventana_Principal(QMainWindow, Ventana_Principal.Ui_Principal_MainWindow):
 
     def actualizar_desde_JSON(self):
 
-        if(objeto.readFile("Memoria/Péliculas_ingresadas.json") and ll.length() == 0):
+        dir = os.path.dirname(__file__)
+        archivo_json = os.path.join(dir, 'Memoria/Péliculas_ingresadas.json')
+        if(objeto.readFile(archivo_json) and ll.length() == 0):
         
-            dict = ast.literal_eval(objeto.readFile("Memoria/Péliculas_ingresadas.json"))
+            dict = ast.literal_eval(objeto.readFile(archivo_json))
             for i in range((len(dict))):
                 
-                #temp = str(count)
+                
                 var = str(dict[str(i)])
                 var = var.split("'")
                 instanica_Pelicula = Info_Pelicula(var[3], var[7], var[11], var[15], var[19])
@@ -214,6 +217,8 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
     def guardar_json(self):
         
         current = ll.first
+        dir = os.path.dirname(__file__)
+        archivo_json = os.path.join(dir, 'Memoria/Péliculas_ingresadas.json')
 
         if(current):
 
@@ -241,11 +246,11 @@ class Agregar_Pelicula(QMainWindow, Agregar_Pélicula.Ui_Agregar_MainWindow):
                 current = current.next
                 contador += 1
 
-            objeto.createFile("Memoria/Péliculas_ingresadas.json", json)        
+            objeto.createFile(archivo_json, json)        
 
         else:
             json = ""
-            objeto.createFile("Memoria/Péliculas_ingresadas.json", json)        
+            objeto.createFile(archivo_json, json)        
 
     def abrir_Ventana_Principal(self): 
 
@@ -361,6 +366,7 @@ class Ver_y_Editar_Peliculas(QMainWindow, Ver_y_Editar_Péliculas.Ui_Ver_y_Edita
     
         try:
             ID = int(self.ID_lineEdit.text())-1
+            
 
             if(int(ID) < 0 or int(ID)+1 > ll.length()):
 
